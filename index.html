@@ -1,88 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
     <title>Quiz</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="content">
         <div class="main">
-            <section class="start">
-                <h1>ПРОЙДИ ТЕСТ И ПОЛУЧИ ВИДЕО</h1>
-                <p>Пройди тест и получи индивидуальное поздравление</p>
-                <button class="btn">
-                    Пройти тест
-                </button>
-            </section>
-            <section class="questions">
-                <div class="numbers">
-                    <span>1/7</span>
+          <section class="start">
+            <h1>ПРОЙДИ ТЕСТ И ПОЛУЧИ ВИДЕО</h1>
+            <p>Пройди тест и получи индивидуальное поздравление</p>
+            <button class="btn">Пройти тест</button>
+          </section>
+          <section class="questions">
+            <img class="arr-left" src="/img/arrow-left.svg" alt="arr-left" />
+            <div class="numbers">
+              <span>1/7</span>
+            </div>
+            <div class="title">
+              <h1 class="question">
+                Начнем с философского вопроса: <br />
+                стакан наполовину полон или пуст?
+              </h1>
+            </div>
+            <div class="answers">
+              <p><span class="dot"></span> Наполовину полон</p>
+              <p><span class="dot"></span> Наполовину пуст</p>
+            </div>
+            <div class="butn">
+              <button class="btn" style="">Далее</button>
+            </div>
+          </section>
+          <section class="final">
+            <div class="final__header">
+              <div class="header__head">
+                <h1>Это видео для тебя</h1>
+                <p>
+                  Если тебе понравилось это видео — скачай или поделить им в
+                  социальных сетях
+                </p>
+              </div>
+              <div class="final__body">
+                <p>Поделиться</p>
+                <div class="body__send">
+                  <div class="send_doc">
+                    <img src="/img/video.svg" alt="doc" />
+                    <a href="#">Отправить видео</a>
+                  </div>
+                  <div class="send__sicon">
+                    <img src="/img/send_icon.svg" alt="send" />
+                    <a href="#">Отправить тест</a>
+                  </div>
                 </div>
-                <div class="title">
-                    <img class="arr-left" src="/img/arrow-left.svg" alt="arr-left">
-                    <h1 class="question">Начнем с философского вопроса: <br> стакан наполовину полон или пуст?</h1>
-                </div>
-                <div class="answers">
-                    <p><span class="dot"></span> Наполовину полон</p>
-                    <p><span class="dot"></span> Наполовину пуст</p>
-                </div>
-                <div class="butn">
-                    <button class="btn" style="">
-                        Далее
-                    </button>
-                </div>
-            </section>
-            <section class="final">
-                <div class="final__header">
-                    <div class="header__head">
-                        <h1>Это видео для тебя</h1>
-                        <p>Если тебе понравилось это видео — скачай или поделить им в социальных сетях</p>
-                    </div>
-                    <div class="final__body">
-                        <p>Поделиться</p>
-                        <div class="body__send">
-                            <div class="send_doc">
-                                <img src="/img/video.svg" alt="doc">
-                                <a href="#">Отправить видео</a>
-
-                            </div>
-                            <div class="send__sicon">
-                                <img src="/img/send_icon.svg" alt="send">
-                                <a href="#">Отправить тест</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="header__col">
-                    <video width="400" controls>
-                        <source src="mov_bbb.mp4" type="video/mp4">
-                        <source src="mov_bbb.ogg" type="video/ogg">
-                        Your browser does not support HTML video.
-                    </video>
-                    <div class="col__download">
-                        <img src="/img/document-download.svg" alt="doc">
-                        <a href="#">Скачать видео</a>
-                    </div>
-                </div>
-            </section>
+              </div>
+            </div>
+            <div class="header__col">
+              <video width="400" controls>
+                <source src="mov_bbb.mp4" type="video/mp4" />
+                <source src="mov_bbb.ogg" type="video/ogg" />
+                Your browser does not support HTML video.
+              </video>
+              <div class="col__download">
+                <img src="/img/document-download.svg" alt="doc" />
+                <a href="#">Скачать видео</a>
+              </div>
+            </div>
+          </section>
         </div>
-    </div>
         <footer>
-            <div class="year">
-                © 2023.
-            </div>
-            <div class="social">
-                <img src="./img/Vkontakte.svg" alt="vk">
-                <img src="./img/Whatsapp.svg" alt="Whatsapp">
-                <img src="./img/Instagram.svg" alt="instagram">
-            </div>
+          <div class="year">© 2023.</div>
+          <div class="social">
+            <img src="./img/Vkontakte.svg" alt="vk" />
+            <img src="./img/Whatsapp.svg" alt="Whatsapp" />
+            <img src="./img/Instagram.svg" alt="instagram" />
+          </div>
         </footer>
-        <script src="./index.js"></script>
-</body>
-
+    </div>
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+            <h2 id="question">Question Text</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="a" class="answer">
+                    <label for="a" id="a_text">Answer</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="b" class="answer">
+                    <label for="b" id="b_text">Answer</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="c" class="answer">
+                    <label for="c" id="c_text">Answer</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="d" class="answer">
+                    <label for="d" id="d_text">Answer</label>
+                </li>
+            </ul>
+        </div>
+        <button id="submit">Submit</button>
+    </div>
+    <script src="/quiz.js"></script>
+  </body>
 </html>
