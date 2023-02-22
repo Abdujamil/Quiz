@@ -1,14 +1,12 @@
 const quizData = [
     {
         question: "Начнем с философского вопроса: стакан наполовину полон или пуст?",
-        a: "Наполовину полон",
-        b: "Наполовину пуст",
-        correct: "d",
+        answers: ["Наполовину полон", "Наполовину пуст"],
+        correct: 0,
     },
     {
         question: "Каким ты себя ощущаешь: уже поднакопила жизненной мудрости или всегда молода душой?",
-        a: "Мудрый",
-        b: "Молодой",
+        answers: ["Мудрый", "Молодой"],
         correct: "b",
     },
     {
@@ -18,7 +16,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "У вас есть возможность сходить на концерт, что вы выберете: Stand Up-выступление или концерт музыкальной группы?",
+        question: "У вас есть возможность сходить на концерт, что вы выберете: Stand Up-выступление или концерт музыкальной группы?",
         a: "Stand Up",
         b: "Концерт музыкальной группы",
         correct: "b",
@@ -42,7 +40,7 @@ const quizData = [
         b: "Главное - это польза",
         correct: "a",
     },
-    
+
 ]
 
 const quiz = document.getElementById('quiz');
@@ -60,12 +58,9 @@ const submitBtn = document.getElementById('submit');
 let currentQuiz = 0;
 let score = 0;
 
-
 loadQuiz();
 
-
-function loadQuiz(){
-
+function loadQuiz() {
     deselectAnswers();
 
     const currentQuizData = quizData[currentQuiz]
@@ -82,11 +77,10 @@ function deselectAnswers() {
     answerEls.forEach(answersE1 => answersE1.checked = false);
 }
 
-
 function getSelected() {
     let answer
     answerEls.forEach(answersE1 => {
-        if(answersE1.checked){
+        if (answersE1.checked) {
             answer = answersE1.id
         }
         return answer;
@@ -95,7 +89,7 @@ function getSelected() {
 
 submitBtn.addEventListener('click', () => {
     const answer = getSelected()
-    if(answer){
+    if (answer) {
         if (answer === quizData[currentQuiz].correct) {
             score++;
             console.log('no');
@@ -105,9 +99,9 @@ submitBtn.addEventListener('click', () => {
         console.log('no2');
 
 
-        if(currentQuiz < quizData.length){
+        if (currentQuiz < quizData.length) {
             loadQuiz();
-        }else{
+        } else {
             quiz.innerHTML = `
             <h2> You answered ${score}/${quizData.length} questions correctly</h2>
 
@@ -117,10 +111,11 @@ submitBtn.addEventListener('click', () => {
     }
 })
 
+const startQuizBtn = document.querySelector('.start-quiz-btn');
+const sectionStart = document.querySelector('#section-start');
+const sectionQuestions = document.querySelector('#section-questions');
 
-const strtNone = document.getElementsByClassName('.btn');
-const start = document.getElementsByClassName('.start');
-
-strtNone.addEventListener('click', () => {
-    start.classList.toggle('startnone');
+startQuizBtn.addEventListener('click', () => {
+    sectionStart.classList.toggle('d-none');
+    sectionQuestions.classList.toggle('d-none');
 })
