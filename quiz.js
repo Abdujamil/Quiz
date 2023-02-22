@@ -1,20 +1,4 @@
-const quizData = [
-    {
-        question: "Начнем с философского вопроса: стакан наполовину полон или пуст?",
-        answers: ["Наполовину полон", "Наполовину пуст"],
-        correct: 0,
-    },
-    {
-        question: "Каким ты себя ощущаешь: уже поднакопила жизненной мудрости или всегда молода душой?",
-        answers: ["Мудрый", "Молодой"],
-        correct: "b",
-    },
-    {
-        question: "По китайскому календарю 2023 год – это год…?",
-        a: "Котика",
-        b: "Кролика",
-        correct: "a",
-    },
+/*
     {
         question: "У вас есть возможность сходить на концерт, что вы выберете: Stand Up-выступление или концерт музыкальной группы?",
         a: "Stand Up",
@@ -40,43 +24,131 @@ const quizData = [
         b: "Главное - это польза",
         correct: "a",
     },
+ */
 
-]
+const QUESTIONS = [
+    {
+        question: "Начнем с философского вопроса: стакан наполовину полон или пуст?",
+        answers: [
+            {
+                text: "Наполовину полон",
+                points: 1,
+            },
+            {
+                text: "Наполовину пуст",
+                points: 2,
+            }
+        ],
+    },
+    {
+        question: "Каким ты себя ощущаешь: уже поднакопила жизненной мудрости или всегда молода душой?",
+        answers: [
+            {
+                text: "Мудрый",
+                points: 1,
+            },
+            {
+                text: "Молодой",
+                points: 2,
+            }
+        ],
+    },
+    {
+        question: "По китайскому календарю 2023 год – это год…?",
+        answers: [
+            {
+                text: "Котика",
+                points: 1,
+            },
+            {
+                text: "Кролика",
+                points: 2,
+            }
+        ],
+    },
+];
 
-const quiz = document.getElementById('quiz');
-const answerEls = document.querySelectorAll('.answer');
-const questionEl = document.getElementById('question');
+const startQuizEl = document.querySelector('.start-quiz-btn');
+const sectionStartEl = document.querySelector('#section-start');
+const sectionQuestionsEl = document.querySelector('#section-questions');
+const answersBlockEl = document.querySelector('.answers');
+const questionTitleEl = document.querySelector('.question-title');
+const submitEl = document.getElementById('submit');
+const currentStepEl = document.getElementById('current-step');
+const sectionFinalEl = document.getElementById('section-final');
+document.getElementById('questions-count').innerText = QUESTIONS.length;
 
-const a_text = document.getElementById('a_text');
-const b_text = document.getElementById('b_text');
-const c_text = document.getElementById('c_text');
-const d_text = document.getElementById('d_text');
+let currentStep = 0; // текущий шаг в квизе
+let points = {}; // результаты ответов
 
-const submitBtn = document.getElementById('submit');
+startQuizEl.addEventListener('click', () => {
+    sectionStartEl.classList.toggle('d-none');
+    sectionQuestionsEl.classList.toggle('d-none');
+    renderQuizQuestion();
+});
 
+answersBlockEl.addEventListener('click', function (event) {
+    if (event.target && event.target.matches("input[type='radio']")) {
+        submitEl.classList.remove('d-none');
+        points[currentStep] = +event.target.value;
+    }
+});
 
-let currentQuiz = 0;
-let score = 0;
+submitEl.addEventListener('click', () => {
+    currentStep++;
+    renderQuizQuestion();
+});
 
-loadQuiz();
-
-function loadQuiz() {
-    deselectAnswers();
-
-    const currentQuizData = quizData[currentQuiz]
-
-    questionEl.innerText = currentQuizData.question
-
-    a_text.innerText = currentQuizData.a
-    b_text.innerText = currentQuizData.b
-    c_text.innerText = currentQuizData.c
-    d_text.innerText = currentQuizData.d
+function renderQuizQuestion() {
+    if (currentStep < QUESTIONS.length) {
+        submitEl.classList.add('d-none');
+        answersBlockEl.innerHTML = '';
+        currentStepEl.innerText = currentStep + 1;
+        const currentQuestion = QUESTIONS[currentStep];
+        questionTitleEl.innerText = currentQuestion.question;
+        currentQuestion.answers.forEach((answer, index) => {
+            answersBlockEl.innerHTML += `
+                <label class="radio-container">
+                        ${answer.text}
+                        <input type="radio" name="radio" value="${answer.points}">
+                        <span class="checkmark"></span>
+                </label>
+            `;
+        });
+    } else {
+        sectionQuestionsEl.classList.toggle('d-none');
+        sectionFinalEl.classList.toggle('d-none');
+        const sum = Object.values(points).reduce((partialSum, a) => partialSum + a, 0);
+        if (sum > 7 && sum < 10) {
+            //video 1
+        } else {
+            //video 2
+        }
+        console.log({ points, sum });
+    }
 }
 
+function prevStep() {
+    if (currentStep > 0) {
+        currentStep--;
+    }
+    renderQuizQuestion();
+}
+
+function reloadQuiz() {
+    // console.log('reload')
+    currentStep = 0;
+    points = {};
+    sectionFinalEl.classList.toggle('d-none');
+    sectionQuestionsEl.classList.remove('d-none');
+    renderQuizQuestion();
+}
+
+/*
 function deselectAnswers() {
     answerEls.forEach(answersE1 => answersE1.checked = false);
 }
-
+ 
 function getSelected() {
     let answer
     answerEls.forEach(answersE1 => {
@@ -86,7 +158,7 @@ function getSelected() {
         return answer;
     })
 }
-
+ 
 submitBtn.addEventListener('click', () => {
     const answer = getSelected()
     if (answer) {
@@ -94,28 +166,24 @@ submitBtn.addEventListener('click', () => {
             score++;
             console.log('no');
         }
-
+ 
         currentQuiz++;
         console.log('no2');
-
-
+ 
+ 
         if (currentQuiz < quizData.length) {
             loadQuiz();
         } else {
             quiz.innerHTML = `
             <h2> You answered ${score}/${quizData.length} questions correctly</h2>
-
+ 
             <button onclick="location.reload()">Reload</button>
             `
         }
     }
 })
+*/
 
-const startQuizBtn = document.querySelector('.start-quiz-btn');
-const sectionStart = document.querySelector('#section-start');
-const sectionQuestions = document.querySelector('#section-questions');
 
-startQuizBtn.addEventListener('click', () => {
-    sectionStart.classList.toggle('d-none');
-    sectionQuestions.classList.toggle('d-none');
-})
+
+
